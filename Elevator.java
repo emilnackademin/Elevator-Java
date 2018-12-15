@@ -1,56 +1,73 @@
 
 public class Elevator {
 
-    private int currentFloor, baseFloor, topFloor;
-    final int FLOORS = 21;
+	private int currentFloor;
+	private String elevatorName;
+	final int BASEFLOOR = 0, TOPFLOOR = 20;
 
-    public Elevator() {
-	super();
-	this.setCurrentFloor((int) (Math.random() * 20 + 1));
-	this.setBaseFloor(0);
-	this.setTopFloor(20);
-
-    }
-
-    public int getCurrentFloor() {
-	return currentFloor;
-    }
-
-    public void setCurrentFloor(int currentFloor) {
-	this.currentFloor = currentFloor;
-    }
-
-    public int getBaseFloor() {
-	return baseFloor;
-    }
-
-    public void setBaseFloor(int baseFloor) {
-	this.baseFloor = baseFloor;
-    }
-
-    public int getTopFloor() {
-	return topFloor;
-    }
-
-    public void setTopFloor(int topFloor) {
-	this.topFloor = topFloor;
-    }
-
-    int goUp(int selectFloor, int currentFloor) {
-	this.currentFloor = selectFloor;
-	if (selectFloor <= 20) {
-	    for (int i = currentFloor; i <= selectFloor; i++) {
-		System.out.println("Pling... At floor: " + i);
-	    }
+	public Elevator(int startFloor, String name) {
+		setCurrentFloor(startFloor);
+		setElevatorName(name);
 	}
-	return selectFloor;
-    }
 
-    int goDown(int selectFloor, int currentFloor) {
-	this.currentFloor = selectFloor;
-	for (int i = currentFloor; i >= selectFloor; i--)
-	    System.out.println("Pling... At floor: " + i);
-	return selectFloor;
-    }
+	public String getElevatorName() {
+		return elevatorName;
+	}
+
+	private void setElevatorName(String elevatorName) {
+		this.elevatorName = elevatorName;
+	}
+
+	public int getCurrentFloor() {
+		return currentFloor;
+	}
+
+	private void setCurrentFloor(int currentFloor) {
+		this.currentFloor = currentFloor;
+	}
+
+	int goUp(int amountFloors) {
+		int newFloor = getCurrentFloor() + amountFloors;
+		if (newFloor <= TOPFLOOR) {
+			for (int i = (getCurrentFloor() + 1); i <= newFloor; i++) {
+				System.out.println("Pling... At floor: " + i);
+			}
+			setCurrentFloor(newFloor);
+		} else {
+			System.out.println("This elevator's highest floor is: " + TOPFLOOR);
+		}
+		return newFloor;
+	}
+
+	int goDown(int amountFloors) {
+		int newFloor = getCurrentFloor() - amountFloors;
+		if (newFloor >= BASEFLOOR) {
+			for (int i = (getCurrentFloor() - 1); i >= newFloor; i--) {
+				System.out.println("Pling... At floor: " + i);
+			}
+			setCurrentFloor(newFloor);
+		} else {
+			System.out.println("This building's lowest floor is: " + BASEFLOOR);
+		}
+		return newFloor;
+	}
+
+	public void MoveElevator(int selectFloor) {
+		if (selectFloor > getCurrentFloor()) {
+			goUp(selectFloor - getCurrentFloor());
+		} else if (selectFloor < getCurrentFloor()) {
+			goDown(getCurrentFloor() - selectFloor);
+		} else {
+			System.out.println("You are already on that floor");
+		}
+	}
+
+	public void elevatorInfo() {
+		System.out.println("Elevator name: " + elevatorName);
+		System.out.println("Current Floor:" + getCurrentFloor());
+		System.out.println("Base Floor: " + BASEFLOOR);
+		System.out.println("Top Floor: " + TOPFLOOR);
+		System.out.println("Total Floors: " + (TOPFLOOR + 1));
+	}
 
 }
