@@ -64,7 +64,7 @@ public class Elevator {
 
 	public void elevatorInfo() {
 		System.out.println("Elevator name: " + elevatorName);
-		System.out.println("Current Floor:" + getCurrentFloor());
+		System.out.println("Current Floor: " + getCurrentFloor());
 		System.out.println("Base Floor: " + BASEFLOOR);
 		System.out.println("Top Floor: " + TOPFLOOR);
 		System.out.println("Total Floors: " + (TOPFLOOR + 1));
